@@ -47,16 +47,16 @@ class UsersController extends Controller
       'password' => bcrypt($request->password),
     ]);
 
-        // Auth::login($user);
-        //临时数据保存，之后使用session()->get('success') 获取数据
-        session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
-        //用户模型 User::create() 创建成功后会返回一个用户对象，并包含新注册用户的所有信息。我们将新注册用户的所有信息赋值给变量 $user，并通过路由跳转来进行数据绑定。
-        return redirect()->route('users.show', [$user]);
+        // // Auth::login($user);
+        // //临时数据保存，之后使用session()->get('success') 获取数据
+        // session()->flash('success', '欢迎，您将在这里开启一段新的旅程~');
+        // //用户模型 User::create() 创建成功后会返回一个用户对象，并包含新注册用户的所有信息。我们将新注册用户的所有信息赋值给变量 $user，并通过路由跳转来进行数据绑定。
+        // return redirect()->route('users.show', [$user]);
 
         //发送注册邮件，返回首页
-        // $this->sendEmailConfirmationTo($user);
-        // session()->flash('success', '验证邮件已发送到你的注册邮箱上，请注意查收。');
-        // return redirect('/');
+        $this->sendEmailConfirmationTo($user);
+        session()->flash('success', '验证邮件已发送到你的注册邮箱上，请注意查收。');
+        return redirect('/');
     }
 
     //编辑
